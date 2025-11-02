@@ -29,7 +29,5 @@ struct ShaderViewRTW: View {
 }
 
 #Preview {
-    NavigationView {
-        ShaderViewRTW(ShaderLibrary.RTW6_Normals())
-    }
+    ShaderViewRTW(ShaderLibrary.RTW6_Normals())
 }

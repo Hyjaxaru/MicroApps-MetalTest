@@ -95,6 +95,7 @@ struct ContentView: View {
                 Tab("Shader Tests", systemImage: "square") {
                     NavigationStack {
                         List {
+                            #if !os(macOS)
                             Section {
                                 TabView {
                                     ForEach(shaderTests) { shader in
@@ -113,6 +114,7 @@ struct ContentView: View {
                             }
                             .listRowInsets(EdgeInsets())
                             .frame(height: 200)
+                            #endif
                             
                             Section {
                                 ForEach(shaderTests) { shader in
@@ -134,6 +136,7 @@ struct ContentView: View {
                 Tab("RTWeekend", systemImage: "circle") {
                     NavigationStack {
                         List {
+                            #if !os(macOS)
                             Section {
                                 TabView {
                                     ForEach(shaderTestsRTW) { shader in
@@ -146,6 +149,7 @@ struct ContentView: View {
                             }
                             .listRowInsets(EdgeInsets())
                             .frame(height: 200)
+                            #endif
                             
                             Section {
                                 ForEach(shaderTestsRTW) { shader in
