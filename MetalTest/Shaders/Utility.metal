@@ -5,6 +5,9 @@
 //  Created by Noah Albrock on 02/11/2025.
 //
 
+#ifndef UTILITY_METAL
+#define UTILITY_METAL
+
 #include <metal_stdlib>
 using namespace metal;
 
@@ -72,3 +75,5 @@ private:
     float3 orig;
     float3 dir;
 };
+
+#endif

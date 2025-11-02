@@ -11,7 +11,7 @@ using namespace metal;
 #include "Utility.metal"
 
 // MARK: - rayColor
-half4 rayColor(const thread Ray& r) {
+half4 RTW4_rayColor(const thread Ray& r) {
     float3 unitDirection = normalize(r.direction());
     auto a = 0.5*(unitDirection.y + 1.0);
     auto color = (1.0-a)*float3(1) + a*float3(0.5, 0.7, 1.0);
@@ -30,7 +30,7 @@ half4 rayColor(const thread Ray& r) {
     auto rayDirection = pixelCenter - utilities.cameraCenter;
     Ray r(utilities.cameraCenter, rayDirection);
     
-    half4 pixelColor = rayColor(r);
+    half4 pixelColor = RTW4_rayColor(r);
     pixelColor.a = currentColor.a;
     return pixelColor;
 }

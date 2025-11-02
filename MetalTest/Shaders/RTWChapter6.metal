@@ -11,7 +11,7 @@ using namespace metal;
 #include "Utility.metal"
 
 // MARK: - hitSphere
-bool hitSphere(const thread float3& center, float radius, const thread Ray& r) {
+bool RTW6_hitSphere(const thread float3& center, float radius, const thread Ray& r) {
     float3 oc = center - r.origin();
     auto a = dot(r.direction(), r.direction());
     auto b = -2.0 * dot(r.direction(), oc);
@@ -21,8 +21,8 @@ bool hitSphere(const thread float3& center, float radius, const thread Ray& r) {
 }
 
 // MARK: - rayColor
-half4 rayColor(const thread Ray& r) {
-    if (hitSphere(float3(0, 0, -2), 0.5, r))
+half4 RTW6_rayColor(const thread Ray& r) {
+    if (RTW6_hitSphere(float3(0, 0, -2), 0.5, r))
         return half4(1, 0, 0, 1);
     
     float3 unitDirection = normalize(r.direction());
@@ -43,7 +43,7 @@ half4 rayColor(const thread Ray& r) {
     auto rayDirection = pixelCenter - utilities.cameraCenter;
     Ray r(utilities.cameraCenter, rayDirection);
     
-    half4 pixelColor = rayColor(r);
+    half4 pixelColor = RTW6_rayColor(r);
     pixelColor.a = currentColor.a;
     return pixelColor;
 }
