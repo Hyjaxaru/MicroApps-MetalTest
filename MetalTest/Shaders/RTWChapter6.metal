@@ -11,19 +11,28 @@ using namespace metal;
 #include "Utility.metal"
 
 // MARK: - hitSphere
-bool RTW6_hitSphere(const thread float3& center, float radius, const thread Ray& r) {
+float RTW6_hitSphere(const thread float3& center, float radius, const thread Ray& r) {
     float3 oc = center - r.origin();
-    auto a = dot(r.direction(), r.direction());
-    auto b = -2.0 * dot(r.direction(), oc);
-    auto c = dot(oc, oc) - radius*radius;
-    auto discriminant = b*b - 4*a*c;
-    return (discriminant >= 0);
+    auto a = length_squared(r.direction());
+    auto h = dot(r.direction(), oc);
+    auto c = length_squared(oc) - radius*radius;
+    auto discriminant = h*h - a*c;
+    
+    if (discriminant < 0) {
+        return -1.0;
+    } else {
+        return (h - sqrt(discriminant)) / a;
+    }
 }
 
 // MARK: - rayColor
 half4 RTW6_rayColor(const thread Ray& r) {
-    if (RTW6_hitSphere(float3(0, 0, -2), 0.5, r))
-        return half4(1, 0, 0, 1);
+    auto t = RTW6_hitSphere(float3(0, 0, -1), 0.5, r);
+    if (t > 0.0) {
+        float3 N = normalize(r.at(t) - float3(0, 0, -1));
+        auto color = 0.5*float3(N.x+1, N.y+1, N.x+1);
+        return half4(color.r, color.g, color.b, 1);
+    }
     
     float3 unitDirection = normalize(r.direction());
     auto a = 0.5*(unitDirection.y + 1.0);
