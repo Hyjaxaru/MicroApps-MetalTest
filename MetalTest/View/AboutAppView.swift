@@ -43,36 +43,52 @@ struct AboutAppView: View {
                         )
                 )
                 
-                // MARK: - Links
-                Section {
-                    Link(destination: URL(string: "https://github.com/Hyjaxaru/MicroApps-MetalTest")!) {
-                        Text("Source").badge("github.com")
+                // MARK: - Resource Links
+                Section("Resources Used") {
+                    Link(destination: URL(string: "https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-metal-shaders-to-swiftui-views-using-layer-effects")!) {
+                        Text("Hacking with Swift").badge("hackingwithswift.com")
                     }
                     
-                    Link(destination: URL(string: "microapps.hyjaxaru.dev")!) {
-                        Text("MicroApps").badge("hyjaxaru.dev")
+                    Link(destination: URL(string: "https://raytracing.github.io")!) {
+                        Text("Ray Tracing in One Weekend").badge("github.com")
                     }
                     
-                    Link(destination: URL(string: "www.hyjaxaru.dev")!) {
-                        Text("My Portfolio").badge("hyjaxaru.dev")
+                    Link(destination: URL(string: "https://carlosmbe.medium.com")!) {
+                        Text("Carlos Mbendera").badge("medium.com")
                     }
-                } header: {
-                    Text("Links")
                 }
                 
                 // MARK: - About
                 Section {
-                    HStack(spacing: 0) {
-                        Text("Made with ")
-                        Image(systemName: "heart.fill")
-                            .foregroundStyle(.pink.gradient)
-                        Text(" by Hyjaxaru")
+//                    HStack(spacing: 0) {
+//                        Text("Made with ")
+//                        Image(systemName: "heart.fill")
+//                            .foregroundStyle(.pink.gradient)
+//                        Text(" by Hyjaxaru")
+//                    }
+                    
+                    Link(destination: URL(string: "https://github.com/Hyjaxaru/MicroApps-MetalTest")!) {
+                        Text("Source").badge("github.com")
+                    }
+                    
+                    Link(destination: URL(string: "https://microapps.hyjaxaru.dev")!) {
+                        Text("MicroApps").badge("hyjaxaru.dev")
+                    }
+                    
+                    Link(destination: URL(string: "https://www.hyjaxaru.dev")!) {
+                        Text("My Portfolio").badge("hyjaxaru.dev")
                     }
                 } header: {
                     Text("About")
                 } footer: {
                     let year = Calendar.current.component(.year, from: Date())
-                    Text("Copyright © \(String(year)) Hyjaxaru")
+                    HStack(spacing: 0) {
+                        Text("Copyright © \(String(year)) Hyjaxaru  ")
+                        Image(systemName: "circle.fill").font(.system(size: 4))
+                        Text("  Made with ")
+                        Image(systemName: "heart.fill")
+                            .foregroundStyle(.pink.gradient)
+                    }
                 }
             }
             .navigationTitle("About")
