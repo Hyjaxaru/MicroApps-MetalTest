@@ -78,6 +78,15 @@ struct BottomTabContentView: View {
                 }
             }
             
+            // metal rendering
+            Tab("MetalKit", systemImage: "display") {
+                NavigationView {
+                    MetalViewRepresentable()
+                        .navigationTitle("MetalKit")
+                        .ignoresSafeArea()
+                }
+            }
+            
             // my credit
             Tab("About", systemImage: "info.circle") {
                 AboutAppView()
